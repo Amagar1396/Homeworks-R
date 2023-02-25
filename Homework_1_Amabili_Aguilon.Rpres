@@ -1,0 +1,21 @@
+Homework 1
+
+```{r}
+vector <- c(160:200)
+Peso <-matrix(runif(25,160,200),nrow=5,ncol=5,byrow=TRUE)
+total_year<- c("enero","febrero","marzo","abril","mayo")
+total_name<- c("Luis","Fernanda","Rosa","Esteban","Lila")
+rownames(Peso)<- total_year
+colnames(Peso)<- total_name
+F_promedio <- c(rowMeans(Peso))
+C_promedio <- c(colMeans(Peso))
+name<-c("promedio")
+Peso<-cbind(F_promedio)
+Peso<-rbind(name)
+```
+
+
+
+
+
+
