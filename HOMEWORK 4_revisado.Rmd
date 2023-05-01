@@ -1,0 +1,73 @@
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(gapminder)
+library(ggplot2)
+
+diamonds <- read_csv('diamonds.csv')
+```
+```{r}
+data("diamonds")
+str(diamonds) 
+```
+```{r}
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
+
+```
+
+```{r}
+ggplot(diamonds, aes(x=carat, y=price,color=clarity)) + geom_point()
+```
+
+```{r}
+ggplot(diamonds, aes(x=price)) + geom_histogram(bins=40)
+```
+
+```{r}
+ggplot(diamonds, aes(x=cut, y=price)) + geom_boxplot()
+```
+
+```{r}
+ggplot(diamonds, aes(x=cut, y=price, fill=cut)) + geom_boxplot()
+```
+
+```{r}
+filtered_price <- diamonds %>%
+  filter (price > 1000, cut %in% c("Good", "Ideal", "Premium"))
+ 
+```
+
+```{r}
+ggplot(filtered_price, aes(x=cut, y=depth)) + geom_col()
+```
+
+```{r}
+ggplot(filtered_price, aes(x=cut, y=depth, faceting=clarity)) + geom_col()
+```
+
+```{r}
+ggplot(filtered_price, aes(x=cut, y=depth, faceting=clarity, fill=clarity)) + geom_col()
+```
+
+```{r}
+median_dimension_diamond <- diamonds %>%
+  group_by(cut) %>%
+  summarize(medianX = median(x), mediaY = median(y),medianZ = median(z))
+
+median_dimension_diamond
+```
+
+```{r}
+cut_premium <- diamonds %>%
+  filter(cut == "Premium") %>%
+  group_by(clarity) %>%
+  summarize(maxPrice = max(price), minPrice = min(price))
+
+cut_premium
+```
+
+```{r}
+ggplot(cut_premium, aes(x=clarity, y=maxPrice, fill=clarity)) + geom_col()
+```
+
